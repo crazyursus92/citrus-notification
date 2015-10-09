@@ -19,4 +19,4 @@ className - добавить к оповещению свой класс
 
 liveTime - время жизни оповещения
 
-        notif.( message ,className, liveTime);
+        notif.message( message ,className, liveTime);

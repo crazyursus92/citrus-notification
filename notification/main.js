@@ -2,7 +2,6 @@
 var NotificationNS = {
     _Toast: {
         liveTime: 4000,
-        className: ["notification-toast"],
         element: {},
         /**
          * Function create toast
@@ -11,17 +10,14 @@ var NotificationNS = {
          * @param {int} [liveTime] - time live toast
          */
           init: function ( message ,className, liveTime){
+            var classes = ["notification-toast"];
             if(className)
-                this.className.push(className);
+                classes.push(className);
             if(liveTime)
                 this.liveTime = liveTime;
             this.element = document.createElement("div");
-            if(typeof this.className === "object"){
-                for(var i = 0; i < this.className.length; i++)
-                this.element.classList.add(this.className[i]);
-            }
-            else
-                this.element.classList.add(this.className);
+            for(var i = 0; i < classes.length; i++)
+            this.element.classList.add(classes[i]);
             this.element.textContent = message;
             setTimeout(function (el) {
                 el.remove();

@@ -16,6 +16,15 @@ var _Toast = {
         this.element = document.createElement("div");
         this.element.classList.add(this.className);
         this.element.textContent = message;
+        setTimeout(function (el) {
+            el.remove();
+        }, this.liveTime, this);
+      },
+      remove: function () {
+          this.element.classList.add("hide");
+          setTimeout(function (el) {
+              el.element.parentNode.removeChild(el.element);
+          }, 400,this);
       }
 };
 
@@ -27,25 +36,25 @@ var _Toast = {
  */
 var Toast = function (message, className, liveTime) {
     this.liveTime = 4000;
-    this.className = "notification-toast ";
+    this.className = "notification-toast";
     this.element = {};
     this.init(message, className, liveTime);
 };
 
+Toast.prototype = _Toast;
+
 var _Notification = {
     container: {},
+
     init: function () {
         this.container = document.createElement("div");
         this.container.classList.add("notification-container");
-        var body  = document.getElementsByTagName("body");
+        var body  = document.querySelector("body");
+        body.appendChild(this.container);
     },
     message: function (message, className, liveTime) {
         var toast = new Toast(message, className, liveTime);
         this.container.appendChild(toast.element);
-        setTimeout(function () {
-            toast.element.classList.add("hide");
-            setTimeout(toast.element.parentNode.removeChild(toast.element), 400);
-        }, toast.liveTime);
     }
 };
 

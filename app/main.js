@@ -1,6 +1,6 @@
 var _Toast = {
     liveTime: 4000,
-    className: "notification-toast ",
+    className: ["notification-toast"],
     element: {},
     /**
      * Function create toast
@@ -10,11 +10,12 @@ var _Toast = {
      */
       init: function ( message ,className, liveTime){
         if(className)
-            this.className += className;
+            this.className.push(className);
         if(liveTime)
             this.liveTime = liveTime;
         this.element = document.createElement("div");
-        this.element.classList.add(this.className);
+        for(var i = 0; i < this.className.length; i++)
+        this.element.classList.add(this.className[i]);
         this.element.textContent = message;
         setTimeout(function (el) {
             el.remove();
